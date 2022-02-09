@@ -2,6 +2,7 @@
 (define collection "mathle")
 (define deps '("base"
                "curly-fn-lib"
+               "try-catch-finally-lib"
                ; parser
                "megaparsack-lib"
                "functional-lib"))
