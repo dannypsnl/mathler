@@ -19,7 +19,7 @@
   ; FIXME: invalid string like 1*+20/6 should be rejected
   (define answer (string (random-ref s) (random-ref s2) (random-ref s2) (random-ref s2) (random-ref s2) (random-ref s3)))
   (if (and (integer? (calculate answer))
-           (< (calculate answer) 1000))
+           (< 0 (calculate answer) 100))
       (puzzle answer
               (calculate answer))
       (generate-puzzle)))
