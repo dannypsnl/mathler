@@ -1,4 +1,4 @@
-#lang curly-fn racket/base
+#lang racket/base
 (require racket/match
          racket/string
          racket/random
