@@ -1,5 +1,5 @@
 #lang info
-(define collection "mathle")
+(define collection "mathler")
 (define deps '("base"
                "curly-fn-lib"
                "try-catch-finally-lib"

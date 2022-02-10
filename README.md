@@ -1,4 +1,4 @@
-# mathle
+# mathler
 
 math sequence
 
