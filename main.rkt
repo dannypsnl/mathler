@@ -60,15 +60,18 @@
   (let loop ()
     (printf "~a > " (puzzle-compute-answer p))
     (define solution-string (read-line))
-    (try
-     (define r (answer p solution-string))
-     (displayln r)
-     (cond
-       [(solved? r) (displayln "solved")]
-       [else (loop)])
-     (catch (e)
-       (displayln e)
-       )))
-  )
+    (cond
+      [(eof-object? solution-string)
+         (displayln "  ")]
+      [else
+       (try
+        (define r (answer p solution-string))
+        (displayln r)
+        (cond
+          [(solved? r) (displayln "solved")]
+          [else (loop)])
+        (catch (e)
+          (displayln e)
+          (loop)))])))
 
 (gameloop)
