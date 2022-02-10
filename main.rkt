@@ -1,8 +1,5 @@
 #lang racket/base
-(require racket/match
-         racket/string
-         racket/random
-         try-catch-finally
+(require try-catch-finally
          "puzzle.rkt")
 
 (define (gameloop)

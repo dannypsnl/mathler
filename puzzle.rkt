@@ -60,4 +60,4 @@
 
   (define test-target (puzzle "60/5*9" 108))
 
-  (check-true (solved? (answer test-target "27+9*9"))))
+  (check-false (solved? (answer test-target "27+9*9"))))
