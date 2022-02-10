@@ -74,4 +74,5 @@
           (displayln e)
           (loop)))])))
 
-(gameloop)
+(module+ main
+  (gameloop))
