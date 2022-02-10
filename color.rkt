@@ -1,4 +1,6 @@
 #lang racket/base
+(provide black green yellow)
+
 (require syntax/parse/define
          (for-syntax racket/base))
 
@@ -9,10 +11,6 @@
    (with-syntax ([bg:name (datum->syntax #'name (string->symbol (string-append "bg:" (symbol->string (syntax->datum #'name)))))])
      #'(define (name s) (color c s)))])
 
-(defcolor black 30)
-(defcolor green 32)
-(defcolor yellow 33)
-
-(displayln (green "hello, world!"))
-(displayln (yellow "hello, world!"))
-(displayln (black "hello, world!"))
+(defcolor black 40)
+(defcolor green 42)
+(defcolor yellow 43)
