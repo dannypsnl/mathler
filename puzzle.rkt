@@ -11,18 +11,20 @@
 
 (struct puzzle (answer compute-answer) #:transparent)
 
-(define (generate-puzzle)
+(define (gen-answer)
   (define s (string->list "123456789"))
   (define s2 (string->list "01234+-*/56789"))
   (define s3 (string->list "0123456789"))
-  ; FIXME: invalid string like 1*+20/6 should be rejected
   (define p1 (random-ref s))
   (define p2 (random-ref s2))
   (define p3 (if (member p2 (string->list "+-*/")) (random-ref s) (random-ref s2)))
   (define p4 (if (member p3 (string->list "+-*/")) (random-ref s) (random-ref s2)))
   (define p5 (if (member p4 (string->list "+-*/")) (random-ref s) (random-ref s2)))
   (define p6 (random-ref s))
-  (define answer (string p1 p2 p3 p4 p5 p6))
+  (string p1 p2 p3 p4 p5 p6))
+
+(define (generate-puzzle)
+  (define answer (gen-answer))
   (if (and (integer? (calculate answer)) (< 0 (calculate answer) 100))
       (puzzle answer (calculate answer))
       (generate-puzzle)))
