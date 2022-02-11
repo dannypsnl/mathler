@@ -4,9 +4,7 @@
          "puzzle.rkt"
          "color.rkt")
 
-(define test-target (puzzle "60/5*9" 108))
-
-(define s (list->mutable-set (string->list "123456789")))
+(define s1 (list->mutable-set (string->list "123456789")))
 (define s2 (list->mutable-set (string->list "01234+-*/56789")))
 (define s3 (list->mutable-set (string->list "01234+-*/56789")))
 (define s4 (list->mutable-set (string->list "01234+-*/56789")))
@@ -25,7 +23,7 @@
       (random-ref new-s)))
 
 (define (generate-solution result)
-  (define p1 (random-ref s))
+  (define p1 (random-ref s1))
   (define p2 (random-ref s2))
   (define p3 (handle-tmp-set s3 p2))
   (define p4 (handle-tmp-set s4 p3))
@@ -47,31 +45,34 @@
     (match-define (cons c status) p)
     (case status
       [(gray)
-       (set-remove! s c)
+       (set-remove! s1 c)
        (set-remove! s2 c)
        (set-remove! s3 c)
        (set-remove! s4 c)
        (set-remove! s5 c)
        (set-remove! s6 c)]
       [(green) (case i
-                 [(0) (set-intersect! s (set c))]
+                 [(0) (set-intersect! s1 (set c))]
                  [(1) (set-intersect! s2 (set c))]
                  [(2) (set-intersect! s3 (set c))]
                  [(3) (set-intersect! s4 (set c))]
                  [(4) (set-intersect! s5 (set c))]
                  [(5) (set-intersect! s6 (set c))])]
       [(yellow) (case i
-                  [(0) (set-remove! s c)]
+                  [(0) (set-remove! s1 c)]
                   [(1) (set-remove! s2 c)]
                   [(2) (set-remove! s3 c)]
                   [(3) (set-remove! s4 c)]
                   [(4) (set-remove! s5 c)]
                   [(5) (set-remove! s6 c)])])))
 
-(let loop ()
-  (define r (answer test-target (generate-solution 108)))
-  (displayln (pretty r))
-  (update-set r)
-  (if (solved? r)
-      (void)
-      (loop)))
+(module+ main
+  (define test-target (generate-puzzle))
+
+  (let loop ()
+    (define r (answer test-target (generate-solution (puzzle-compute-answer test-target))))
+    (displayln (pretty r))
+    (update-set r)
+    (if (solved? r)
+        (void)
+        (loop))))
