@@ -20,7 +20,7 @@
   (define p3 (if (member p2 (string->list "+-*/")) (random-ref s) (random-ref s2)))
   (define p4 (if (member p3 (string->list "+-*/")) (random-ref s) (random-ref s2)))
   (define p5 (if (member p4 (string->list "+-*/")) (random-ref s) (random-ref s2)))
-  (define p6 (random-ref s))
+  (define p6 (random-ref s3))
   (string p1 p2 p3 p4 p5 p6))
 
 (define (generate-puzzle)
