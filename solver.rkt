@@ -52,12 +52,12 @@
        (set-remove! s5 c)
        (set-remove! s6 c)]
       [(green) (case i
-                 [(0) (set-intersect! s1 (set c))]
-                 [(1) (set-intersect! s2 (set c))]
-                 [(2) (set-intersect! s3 (set c))]
-                 [(3) (set-intersect! s4 (set c))]
-                 [(4) (set-intersect! s5 (set c))]
-                 [(5) (set-intersect! s6 (set c))])]
+                 [(0) (set! s1 (mutable-set c))]
+                 [(1) (set! s2 (mutable-set c))]
+                 [(2) (set! s3 (mutable-set c))]
+                 [(3) (set! s4 (mutable-set c))]
+                 [(4) (set! s5 (mutable-set c))]
+                 [(5) (set! s6 (mutable-set c))])]
       [(yellow) (case i
                   [(0) (set-remove! s1 c)]
                   [(1) (set-remove! s2 c)]
