@@ -31,13 +31,18 @@
     (cond
       [(eof-object? input) (displayln "")]
       [else (define response
-              (map (lambda (s) (match s
-                                 ["g" 'green]
-                                 ["y" 'yellow]
-                                 ["b" 'gray]))
+              (map (lambda (c s)
+                     (cons c (match s
+                               ["g" 'green]
+                               ["y" 'yellow]
+                               ["b" 'gray])))
+                   (string->list solution)
                    (string-split input " ")))
-            (learn (map cons (string->list solution) response))
-            (loop)])))
+            (displayln (pretty response))
+            (learn response)
+            (if (solved? response)
+                (void)
+                (loop))])))
 
 (module+ main
   (require racket/cmdline)
