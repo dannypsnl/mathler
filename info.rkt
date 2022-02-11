@@ -3,6 +3,7 @@
 (define deps
   '("base" "curly-fn-lib"
            "try-catch-finally-lib"
+           "readline-lib"
            ; parser
            "megaparsack-lib"))
 (define build-deps '("scribble-lib" "racket-doc" "rackunit-lib"))
