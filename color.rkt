@@ -1,5 +1,6 @@
 #lang racket/base
-(provide pretty)
+(provide pretty
+         red)
 
 (require syntax/parse/define
          (for-syntax racket/base))
@@ -20,6 +21,7 @@
    #'(define (name s)
        (color c s))])
 
+(defcolor red 31)
 (defcolor black 40)
 (defcolor green 42)
 (defcolor yellow 43)
@@ -27,4 +29,4 @@
 (module+ main
   (require "puzzle.rkt")
   (define test-target (puzzle "60/5*9" 108))
-  (displayln (pretty (answer test-target "27+9*9"))) )
+  (displayln (pretty (answer test-target "27+9*9"))))

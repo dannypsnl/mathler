@@ -16,7 +16,7 @@
             (cond
               [(solved? r) (displayln "solved")]
               [else (loop)])
-            (catch (e) (displayln e) (loop)))])))
+            (catch (exn:fail? e) (displayln (red (exn-message e))) (loop)))])))
 
 (module+ main
   (gameloop))

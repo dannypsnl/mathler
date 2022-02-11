@@ -45,9 +45,13 @@
   (match-define (puzzle answer compute-answer) p)
   (define solution-result (calculate solution-string))
   (unless (= 6 (string-length solution-string))
-    (error 'solution "invalid length"))
+    (error 'invalid "expected length is 6"))
   (unless (= solution-result compute-answer)
-    (error 'solution "invalid: ~a, solution-result: ~a" solution-string solution-result))
+    (error 'invalid
+           "~a = ~a, expected: ~a"
+           solution-string
+           (calculate solution-string)
+           compute-answer))
   (for/list ([c solution-string] [ac answer])
     (cond
       [(eq? c ac) (cons c 'green)]
