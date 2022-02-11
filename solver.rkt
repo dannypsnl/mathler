@@ -1,5 +1,6 @@
 #lang racket
 (require racket/random
+         try-catch-finally
          "puzzle.rkt"
          "color.rkt")
 
@@ -33,9 +34,12 @@
                  (random-ref (set-remove (list->set (set->list s6)) #\0))
                  (random-ref s6)))
   (define solution (string p1 p2 p3 p4 p5 p6))
-  (if (= result (calculate solution))
-      solution
-      (generate-solution result)))
+  (try
+   (if (= result (calculate solution))
+       solution
+       (generate-solution result))
+   (catch (e)
+          (generate-solution result))))
 
 (define (update-set response)
   (for ([p response]
