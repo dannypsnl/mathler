@@ -1,5 +1,7 @@
 #lang racket/base
-(require try-catch-finally
+(require racket/string
+         racket/match
+         try-catch-finally
          readline/readline
          "puzzle.rkt"
          "solver.rkt"
@@ -10,7 +12,7 @@
   (let loop ()
     (define input (readline (format "(~a)> " (puzzle-compute-answer p))))
     (cond
-      [(eof-object? input) (displayln "  ")]
+      [(eof-object? input) (displayln "")]
       [(equal? "auto" input) (solve p)]
       [else (add-history input)
             (try (define response (answer p input))
@@ -20,5 +22,40 @@
                    [else (loop)])
                  (catch (exn:fail? e) (displayln (red (exn-message e))) (loop)))])))
 
+(define (solveloop target)
+  (define-values (generate-solution learn) (generate-solver))
+  (let loop ()
+    (define solution (generate-solution target))
+    (displayln solution)
+    (define input (readline "> "))
+    (cond
+      [(eof-object? input) (displayln "")]
+      [else (define response
+              (map (lambda (s) (match s
+                                 ["g" 'green]
+                                 ["y" 'yellow]
+                                 ["b" 'gray]))
+                   (string-split input " ")))
+            (learn (map cons (string->list solution) response))
+            (loop)])))
+
 (module+ main
-  (gameloop))
+  (require racket/cmdline)
+
+  (command-line #:program "mathler"
+                #:args args
+                (match args
+                  ['("play") (gameloop)]
+                  [(list "solve" target) (solveloop (string->number target))]
+                  [_ (usage)])))
+
+(define (usage)
+  (display "usage: mathler <command> [<args>]
+
+Commands:
+
+  play
+     Start a new game
+  solve <target>
+     Interactive solving a mathler puzzle with the given target
+"))

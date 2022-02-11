@@ -1,5 +1,6 @@
 #lang racket
-(provide solve)
+(provide solve
+         generate-solver)
 
 (require racket/random
          try-catch-finally
