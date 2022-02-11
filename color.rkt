@@ -1,22 +1,30 @@
 #lang racket/base
-(provide black
-         green
-         yellow)
+(provide pretty)
 
 (require syntax/parse/define
          (for-syntax racket/base))
+
+(define (pretty r)
+  (apply string-append
+         (map (lambda (p)
+                (case (cdr p)
+                  [(green) (green (car p))]
+                  [(yellow) (yellow (car p))]
+                  [(gray) (black (car p))]))
+              r)))
 
 (define (color c s)
   (format "\e[1;~am~a\e[0m" c s))
 (define-syntax-parser defcolor
   [(_ name:id c:integer)
-   (with-syntax ([bg:name (datum->syntax
-                           #'name
-                           (string->symbol
-                            (string-append "bg:" (symbol->string (syntax->datum #'name)))))])
-     #'(define (name s)
-         (color c s)))])
+   #'(define (name s)
+       (color c s))])
 
 (defcolor black 40)
 (defcolor green 42)
 (defcolor yellow 43)
+
+(module+ main
+  (require "puzzle.rkt")
+  (define test-target (puzzle "60/5*9" 108))
+  (displayln (pretty (answer test-target "27+9*9"))) )

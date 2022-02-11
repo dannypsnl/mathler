@@ -1,15 +1,7 @@
-#lang curly-fn racket/base
+#lang racket/base
 (require try-catch-finally
          "puzzle.rkt"
          "color.rkt")
-
-(define (pretty r)
-  (apply string-append
-         (map #{(case (cdr %)
-                  [(green) (green (car %))]
-                  [(yellow) (yellow (car %))]
-                  [(gray) (black (car %))])}
-              r)))
 
 (define (gameloop)
   (define p (generate-puzzle))
