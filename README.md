@@ -1,6 +1,6 @@
 # mathler
 
-math sequence
+terminal version of https://www.mathler.com/, also a solver for mathler game.
 
 ### explain
 
