@@ -9,24 +9,26 @@
          racket/string
          "parser.rkt")
 
-(struct puzzle (answer compute-answer)
-  #:transparent)
+(struct puzzle (answer compute-answer) #:transparent)
 
 (define (generate-puzzle)
   (define s (string->list "123456789"))
   (define s2 (string->list "01234+-*/56789"))
   (define s3 (string->list "0123456789"))
   ; FIXME: invalid string like 1*+20/6 should be rejected
-  (define answer (string (random-ref s) (random-ref s2) (random-ref s2) (random-ref s2) (random-ref s2) (random-ref s3)))
-  (if (and (integer? (calculate answer))
-           (< 0 (calculate answer) 100))
-      (puzzle answer
-              (calculate answer))
+  (define answer
+    (string (random-ref s)
+            (random-ref s2)
+            (random-ref s2)
+            (random-ref s2)
+            (random-ref s2)
+            (random-ref s3)))
+  (if (and (integer? (calculate answer)) (< 0 (calculate answer) 100))
+      (puzzle answer (calculate answer))
       (generate-puzzle)))
 
 (define (solved? l)
-  (andmap #{eq? 'green}
-          (map cdr l)))
+  (andmap #{eq? 'green} (map cdr l)))
 
 (define (calculate str)
   (define e (parse-expr str))
@@ -45,11 +47,8 @@
   (unless (= 6 (string-length solution-string))
     (error 'solution "invalid length"))
   (unless (= solution-result compute-answer)
-    (error 'solution "invalid: ~a, solution-result: ~a"
-           solution-string
-           solution-result))
-  (for/list ([c solution-string]
-             [ac answer])
+    (error 'solution "invalid: ~a, solution-result: ~a" solution-string solution-result))
+  (for/list ([c solution-string] [ac answer])
     (cond
       [(eq? c ac) (cons c 'green)]
       [(string-contains? answer (string c)) (cons c 'yellow)]

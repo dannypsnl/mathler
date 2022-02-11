@@ -17,18 +17,14 @@
     (printf "~a > " (puzzle-compute-answer p))
     (define solution-string (read-line))
     (cond
-      [(eof-object? solution-string)
-       (displayln "  ")]
+      [(eof-object? solution-string) (displayln "  ")]
       [else
-       (try
-        (define r (answer p solution-string))
-        (displayln (pretty r))
-        (cond
-          [(solved? r) (displayln "solved")]
-          [else (loop)])
-        (catch (e)
-               (displayln e)
-               (loop)))])))
+       (try (define r (answer p solution-string))
+            (displayln (pretty r))
+            (cond
+              [(solved? r) (displayln "solved")]
+              [else (loop)])
+            (catch (e) (displayln e) (loop)))])))
 
 (module+ main
   (gameloop))
