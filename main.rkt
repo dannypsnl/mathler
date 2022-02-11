@@ -14,13 +14,14 @@
     (cond
       [(eof-object? input) (displayln "")]
       [(equal? "auto" input) (solve p)]
-      [else (add-history input)
-            (try (define response (answer p input))
-                 (displayln (pretty response))
-                 (cond
-                   [(solved? response) (displayln "solved")]
-                   [else (loop)])
-                 (catch (exn:fail? e) (displayln (red (exn-message e))) (loop)))])))
+      [else
+       (add-history input)
+       (try (define response (answer p input))
+            (displayln (pretty response))
+            (cond
+              [(solved? response) (displayln "solved")]
+              [else (loop)])
+            (catch (exn:fail? e) (displayln (red (exn-message e))) (loop)))])))
 
 (define (solveloop target)
   (define-values (generate-solution learn) (generate-solver))
@@ -30,19 +31,19 @@
     (define input (readline "> "))
     (cond
       [(eof-object? input) (displayln "")]
-      [else (define response
-              (map (lambda (c s)
-                     (cons c (match s
-                               ["g" 'green]
-                               ["y" 'yellow]
-                               ["b" 'gray])))
-                   (string->list solution)
-                   (string-split input " ")))
-            (displayln (pretty response))
-            (learn response)
-            (if (solved? response)
-                (void)
-                (loop))])))
+      [else
+       (define response
+         (map (lambda (c s)
+                (cons c
+                      (match s
+                        ["g" 'green]
+                        ["y" 'yellow]
+                        ["b" 'gray])))
+              (string->list solution)
+              (string-split input " ")))
+       (displayln (pretty response))
+       (learn response)
+       (if (solved? response) (void) (loop))])))
 
 (module+ main
   (require racket/cmdline)
@@ -55,7 +56,8 @@
                   [_ (usage)])))
 
 (define (usage)
-  (display "usage: mathler <command> [<args>]
+  (display
+   "usage: mathler <command> [<args>]
 
 Commands:
 
