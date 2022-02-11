@@ -2,7 +2,8 @@
 (provide generate-puzzle
          answer
          solved?
-         (struct-out puzzle))
+         (struct-out puzzle)
+         calculate)
 
 (require racket/random
          racket/match
