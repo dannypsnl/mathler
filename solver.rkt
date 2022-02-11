@@ -41,7 +41,7 @@
 
 (define (update-set response)
   (for ([p response]
-        [i (in-range 0 5)])
+        [i (in-range 0 6)])
     (match-define (cons c status) p)
     (case status
       [(gray)
