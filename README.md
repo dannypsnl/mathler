@@ -2,6 +2,8 @@
 
 terminal version of https://www.mathler.com/, also a solver for mathler game.
 
+<img width="362" alt="圖片" src="https://user-images.githubusercontent.com/22004511/153752508-67fdab9e-c3c2-4e6d-a2ac-bd214f30f717.png">
+
 ### explain
 
 You have 6 guesses to find the hidden calculation.
