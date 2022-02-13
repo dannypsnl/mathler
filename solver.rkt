@@ -18,7 +18,7 @@
 (define (handle-tmp-set s pp)
   (define new-s
     (cond
-      [(member pp (string->list "+-*"))
+      [(string-contains? "+-*" (string pp))
        (set-subtract (list->set (set->list s)) (set #\+ #\- #\* #\/ #\0))]
       [(eq? pp #\/) (set-subtract (list->set (set->list s)) (set #\+ #\- #\* #\/ #\0))]
       [else s]))
