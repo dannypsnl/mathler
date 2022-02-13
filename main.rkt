@@ -7,8 +7,8 @@
          "solver.rkt"
          "color.rkt")
 
-(define (gameloop)
-  (define p (generate-puzzle))
+(define (gameloop [answer #f])
+  (define p (if answer (generate-puzzle answer) (generate-puzzle)))
   (let loop ()
     (define input (readline (format "(~a)> " (puzzle-compute-answer p))))
     (cond
@@ -52,6 +52,7 @@
                 #:args args
                 (match args
                   ['("play") (gameloop)]
+                  [(list "play" answer) (gameloop answer)]
                   [(list "solve" target) (solveloop (string->number target))]
                   [_ (usage)])))
 

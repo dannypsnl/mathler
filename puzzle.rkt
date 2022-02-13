@@ -24,8 +24,7 @@
   (define p6 (if (eq? #\/ p5) (random-ref s) (random-ref s3)))
   (string p1 p2 p3 p4 p5 p6))
 
-(define (generate-puzzle)
-  (define answer (gen-answer))
+(define (generate-puzzle [answer (gen-answer)])
   (if (and (integer? (calculate answer)) (< 0 (calculate answer) 100))
       (puzzle answer (calculate answer))
       (generate-puzzle)))
