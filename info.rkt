@@ -11,3 +11,7 @@
 (define version "0.0")
 (define pkg-authors '(linzizhuan))
 (define license '(Apache-2.0 OR MIT))
+
+(define primary-file "main.rkt")
+(define racket-launcher-names (list "mathler"))
+(define racket-launcher-libraries (list "main.rkt"))
