@@ -4,6 +4,15 @@ terminal version of https://www.mathler.com/, also a solver for mathler game.
 
 <img width="362" alt="圖片" src="https://user-images.githubusercontent.com/22004511/153752508-67fdab9e-c3c2-4e6d-a2ac-bd214f30f717.png">
 
+### Usage
+
+```shell
+# start a new game, optional-puzzle is a puzzle answer string, e.g. '18-2*5'
+mathler play <optional-puzzle>
+# interactive solving a mathler puzzle with the given target
+mathler solve <target>
+```
+
 ### explain
 
 You have 6 guesses to find the hidden calculation.

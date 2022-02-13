@@ -62,7 +62,7 @@
 
 Commands:
 
-  play
+  play <optional-puzzle>
      Start a new game
   solve <target>
      Interactive solving a mathler puzzle with the given target
