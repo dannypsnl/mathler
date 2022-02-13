@@ -19,7 +19,7 @@
   (define new-s
     (cond
       [(member pp (string->list "+-*"))
-       (set-subtract (list->set (set->list s)) (set #\+ #\- #\* #\/))]
+       (set-subtract (list->set (set->list s)) (set #\+ #\- #\* #\/ #\0))]
       [(eq? pp #\/) (set-subtract (list->set (set->list s)) (set #\+ #\- #\* #\/ #\0))]
       [else s]))
   (if (set-empty? new-s) (random-ref s) (random-ref new-s)))
