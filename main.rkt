@@ -40,7 +40,8 @@
                         ["y" 'yellow]
                         ["b" 'gray])))
               (string->list solution)
-              (string-split input " ")))
+              (filter (lambda (s) (not (equal? s "")))
+                      (string-split input " "))))
        (displayln (pretty response))
        (learn response)
        (if (solved? response) (void) (loop))])))
