@@ -1,11 +1,13 @@
 #lang info
 (define collection "mathler")
-(define deps
-  '("base" "curly-fn-lib"
-           "try-catch-finally-lib"
-           "readline-lib"
-           ; parser
-           "megaparsack-lib"))
+(define deps '("base"
+               ; lang extension
+               "curly-fn-lib"
+               "try-catch-finally-lib"
+               ; REPL
+               "readline-lib"
+               ; parser
+               "megaparsack-lib"))
 (define build-deps '("scribble-lib" "racket-doc" "rackunit-lib"))
 (define pkg-desc "Description Here")
 (define version "0.0")
