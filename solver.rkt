@@ -91,11 +91,8 @@
   (values generate-solution learn))
 
 (module+ main
-  (define test-target (generate-puzzle))
-  (solve test-target))
+  (solve (generate-puzzle))
+  (solve (generate-puzzle "5*31-4")))
 
 (module+ test
-  ; in this case, if we guess 35/7+7, it should report '(b y g g g b)
-  (define p (generate-puzzle "49/7+5"))
-
-  (solve p))
+  (solve (generate-puzzle "49/7+5")))
