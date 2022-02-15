@@ -29,6 +29,11 @@
   (for/and ([c yellow*])
     (string-contains? s (string c))))
 
+(define (set-last-one-remove! set e)
+  (if (= 1 (set-count set))
+      (void)
+      (set-remove! set e)))
+
 (define (generate-solver)
   (define s1 (list->mutable-set (string->list "123456789")))
   (define s2 (list->mutable-set (string->list "01234+-*/56789")))
@@ -60,12 +65,12 @@
       (match-define (cons c status) p)
       (case status
         [(gray)
-         (set-remove! s1 c)
-         (set-remove! s2 c)
-         (set-remove! s3 c)
-         (set-remove! s4 c)
-         (set-remove! s5 c)
-         (set-remove! s6 c)]
+         (set-last-one-remove! s1 c)
+         (set-last-one-remove! s2 c)
+         (set-last-one-remove! s3 c)
+         (set-last-one-remove! s4 c)
+         (set-last-one-remove! s5 c)
+         (set-last-one-remove! s6 c)]
         [(green)
          (case i
            [(0) (set! s1 (mutable-set c))]
