@@ -31,9 +31,7 @@
     (string-contains? s (string c))))
 
 (define (set-last-one-remove! set e)
-  (if (= 1 (set-count set))
-      (void)
-      (set-remove! set e)))
+  (if (= 1 (set-count set)) (void) (set-remove! set e)))
 
 (define (generate-solver)
   (define s1 (list->mutable-set (string->list "123456789")))
@@ -100,5 +98,4 @@
   ; in this case, if we guess 35/7+7, it should report '(b y g g g b)
   (define p (generate-puzzle "49/7+5"))
 
-  (solve p)
-  )
+  (solve p))

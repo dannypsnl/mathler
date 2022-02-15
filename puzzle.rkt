@@ -56,9 +56,7 @@
            (calculate solution-string)
            compute-answer))
   (define ans-list (string->list answer))
-  (for/list ([c solution-string]
-             [ac answer]
-             [i (string-length solution-string)])
+  (for/list ([c solution-string] [ac answer] [i (string-length solution-string)])
     (cond
       [(eq? c ac)
        (set! ans-list (remove c ans-list))
@@ -70,6 +68,6 @@
   (require rackunit)
 
   (check-false (solved? (answer (generate-puzzle "60/5*9") "27+9*9")))
-  (check-equal? (answer (generate-puzzle "49/7+5") "35/7+7")
-                '((#\3 . gray) (#\5 . yellow) (#\/ . green) (#\7 . green) (#\+ . green) (#\7 . gray)))
-  )
+  (check-equal?
+   (answer (generate-puzzle "49/7+5") "35/7+7")
+   '((#\3 . gray) (#\5 . yellow) (#\/ . green) (#\7 . green) (#\+ . green) (#\7 . gray))))
