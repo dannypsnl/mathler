@@ -47,11 +47,15 @@
     (define p2 (random-ref s2))
     (define p3 (handle-tmp-set s3 p1 p2))
     (define p4 (handle-tmp-set s4 p2 p3))
-    (define p5 (handle-tmp-set s5 p3 p4))
+    (define p5
+      (random-ref (cond
+                    [(string-contains? "+-*/" (string p4))
+                     (set-subtract (list->set (set->list s4)) (set #\+ #\- #\* #\/ #\0))]
+                    [(and (string-contains? "+-*/" (string p3)) (eq? p4 #\0)) (set #\+ #\- #\* #\/)]
+                    [else s4])))
     (define p6
       (cond
         [(eq? p5 #\/) (random-ref (set-remove (list->set (set->list s6)) #\0))]
-        [(and (string-contains? "+-*/" (string p4)) (eq? p5 #\0)) (set #\+ #\- #\* #\/)]
         [else (random-ref s6)]))
     (define solution (string p1 p2 p3 p4 p5 p6))
     (try (if (and (= result (calculate solution)) (yellow-in? solution yellow*))
