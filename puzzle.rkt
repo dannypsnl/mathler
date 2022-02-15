@@ -25,7 +25,7 @@
   (string p1 p2 p3 p4 p5 p6))
 
 (define (generate-puzzle [answer (gen-answer)])
-  (if (and (integer? (calculate answer)) (< 0 (calculate answer) 100))
+  (if (and (integer? (calculate answer)) (< 0 (calculate answer) 200))
       (puzzle answer (calculate answer))
       (generate-puzzle)))
 
@@ -63,6 +63,5 @@
 (module+ test
   (require rackunit)
 
-  (define test-target (puzzle "60/5*9" 108))
-
-  (check-false (solved? (answer test-target "27+9*9"))))
+  (check-false (solved? (answer (generate-puzzle "60/5*9") "27+9*9")))
+  )
