@@ -5,7 +5,8 @@
          readline/readline
          "puzzle.rkt"
          "solver.rkt"
-         "color.rkt")
+         "color.rkt"
+         "response-parser.rkt")
 
 (define (gameloop [answer #f])
   (define p (if answer (generate-puzzle answer) (generate-puzzle)))
@@ -32,15 +33,7 @@
     (cond
       [(eof-object? input) (displayln "")]
       [else
-       (define response
-         (map (lambda (c s)
-                (cons c
-                      (match s
-                        ["g" 'green]
-                        ["y" 'yellow]
-                        ["b" 'gray])))
-              (string->list solution)
-              (filter (lambda (s) (not (equal? s ""))) (string-split input " "))))
+       (define response (map cons (string->list solution) (parse-response input)))
        (displayln (pretty response))
        (learn response)
        (if (solved? response) (void) (loop))])))
