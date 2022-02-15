@@ -7,6 +7,7 @@
 
 (require racket/random
          racket/match
+         racket/set
          racket/string
          "parser.rkt")
 
@@ -54,14 +55,21 @@
            solution-string
            (calculate solution-string)
            compute-answer))
-  (for/list ([c solution-string] [ac answer])
+  (define ans-list (string->list answer))
+  (for/list ([c solution-string]
+             [ac answer]
+             [i (string-length solution-string)])
     (cond
-      [(eq? c ac) (cons c 'green)]
-      [(string-contains? answer (string c)) (cons c 'yellow)]
+      [(eq? c ac)
+       (set! ans-list (remove c ans-list))
+       (cons c 'green)]
+      [(member c ans-list) (cons c 'yellow)]
       [else (cons c 'gray)])))
 
 (module+ test
   (require rackunit)
 
   (check-false (solved? (answer (generate-puzzle "60/5*9") "27+9*9")))
+  (check-equal? (answer (generate-puzzle "49/7+5") "35/7+7")
+                '((#\3 . gray) (#\5 . yellow) (#\/ . green) (#\7 . green) (#\+ . green) (#\7 . gray)))
   )
