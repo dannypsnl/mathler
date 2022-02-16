@@ -96,7 +96,5 @@
 
 (module+ main
   (solve (generate-puzzle))
-  (solve (generate-puzzle "5*31-4")))
-
-(module+ test
+  (solve (generate-puzzle "5*31-4"))
   (solve (generate-puzzle "49/7+5")))
