@@ -14,15 +14,13 @@
     (if (solved? r) (void) (loop))))
 
 (define (handle-tmp-set s previous-previous-p previous-p)
-  (define new-s
-    (cond
-      [(string-contains? "+-*" (string previous-p))
-       (set-subtract (list->set (set->list s)) (set #\+ #\- #\* #\/))]
-      [(eq? previous-p #\/) (set-subtract (list->set (set->list s)) (set #\+ #\- #\* #\/ #\0))]
-      [(and (string-contains? "+-*/" (string previous-previous-p)) (eq? previous-p #\0))
-       (set #\+ #\- #\* #\/)]
-      [else s]))
-  (if (set-empty? new-s) s new-s))
+  (cond
+    [(string-contains? "+-*" (string previous-p))
+     (set-subtract (list->set (set->list s)) (set #\+ #\- #\* #\/))]
+    [(eq? previous-p #\/) (set-subtract (list->set (set->list s)) (set #\+ #\- #\* #\/ #\0))]
+    [(and (string-contains? "+-*/" (string previous-previous-p)) (eq? previous-p #\0))
+     (set #\+ #\- #\* #\/)]
+    [else s]))
 
 (define (yellow-in? s yellow*)
   (for/and ([c yellow*])
