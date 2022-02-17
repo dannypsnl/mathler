@@ -1,8 +1,11 @@
-#lang racket
+#lang racket/base
 (provide solve
          generate-solver)
 
-(require "puzzle.rkt"
+(require racket/string
+         racket/set
+         racket/match
+         "puzzle.rkt"
          "color.rkt")
 
 (define (solve p)
@@ -13,7 +16,7 @@
     (learn r)
     (if (solved? r) (void) (loop))))
 
-(define (handle-tmp-set s previous-previous-p previous-p)
+(define (remove-impossible-solution s previous-previous-p previous-p)
   (cond
     [(string-contains? "+-*" (string previous-p))
      (set-subtract (list->set (set->list s)) (set #\+ #\- #\* #\/))]
@@ -43,8 +46,8 @@
      return
      (for ([p1 (in-set s1)])
        (for ([p2 (in-set s2)])
-         (for ([p3 (in-set (handle-tmp-set s3 p1 p2))])
-           (for ([p4 (in-set (handle-tmp-set s4 p2 p3))])
+         (for ([p3 (in-set (remove-impossible-solution s3 p1 p2))])
+           (for ([p4 (in-set (remove-impossible-solution s4 p2 p3))])
              (for ([p5 (in-set (cond
                                  [(string-contains? "+-*/" (string p4))
                                   (set-subtract (list->set (set->list s5)) (set #\+ #\- #\* #\/ #\0))]
