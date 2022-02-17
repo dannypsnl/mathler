@@ -12,7 +12,7 @@ mathler solve <target>
 ```
 
 <img width="362" alt="圖片" src="https://user-images.githubusercontent.com/22004511/153752508-67fdab9e-c3c2-4e6d-a2ac-bd214f30f717.png">
-<img width="403" alt="圖片" src="https://user-images.githubusercontent.com/22004511/153770594-4a325a79-4252-4b3b-9a93-6e557330edb4.png">
+![solve](./images/solve.png)
 
 ### Develop
 
