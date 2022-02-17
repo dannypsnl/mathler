@@ -2,9 +2,7 @@
 (provide solve
          generate-solver)
 
-(require racket/random
-         try-catch-finally
-         "puzzle.rkt"
+(require "puzzle.rkt"
          "color.rkt")
 
 (define (solve p)
@@ -51,10 +49,10 @@
            (for ([p4 (in-set (handle-tmp-set s4 p2 p3))])
              (for ([p5 (in-set (cond
                                  [(string-contains? "+-*/" (string p4))
-                                  (set-subtract (list->set (set->list s4)) (set #\+ #\- #\* #\/ #\0))]
+                                  (set-subtract (list->set (set->list s5)) (set #\+ #\- #\* #\/ #\0))]
                                  [(and (string-contains? "+-*/" (string p3)) (eq? p4 #\0))
                                   (set #\+ #\- #\* #\/)]
-                                 [else s4]))])
+                                 [else s5]))])
                (for ([p6 (in-set (if (eq? p5 #\/) (set-remove (list->set (set->list s6)) #\0) s6))])
                  (define solution (string p1 p2 p3 p4 p5 p6))
                  (when (and (= result (calculate solution)) (yellow-in? solution yellow*))
