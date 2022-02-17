@@ -89,7 +89,11 @@
   (values generate-solution learn))
 
 (module+ main
-  (solve (generate-puzzle))
-  (solve (generate-puzzle "5*31-4"))
-  (solve (generate-puzzle "49/7+5"))
-  (solve (generate-puzzle "28/7*6")))
+  (define (show p)
+    (printf "solving: ~a~n" (puzzle-answer p))
+    (solve p))
+
+  (show (generate-puzzle))
+  (show (generate-puzzle "5*31-4"))
+  (show (generate-puzzle "49/7+5"))
+  (show (generate-puzzle "28/7*6")))
