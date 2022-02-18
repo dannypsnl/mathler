@@ -56,7 +56,7 @@
            (calculate solution-string)
            compute-answer))
   (define ans-list (string->list answer))
-  (for/list ([c solution-string] [ac answer] [i (string-length solution-string)])
+  (for/list ([c solution-string] [ac answer])
     (cond
       [(eq? c ac)
        (set! ans-list (remove c ans-list))
