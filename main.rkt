@@ -1,6 +1,5 @@
 #lang racket/base
-(require racket/string
-         racket/match
+(require racket/match
          try-catch-finally
          readline/readline
          "puzzle.rkt"
@@ -8,8 +7,8 @@
          "color.rkt"
          "response-parser.rkt")
 
-(define (gameloop [answer #f])
-  (define p (if answer (generate-puzzle answer) (generate-puzzle)))
+(define (gameloop [ans #f])
+  (define p (if ans (generate-puzzle ans) (generate-puzzle)))
   (let loop ()
     (define input (readline (format "(~a)> " (puzzle-compute-answer p))))
     (cond
