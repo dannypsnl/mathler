@@ -61,13 +61,17 @@
       [(eq? c ac)
        (set! ans-list (remove c ans-list))
        (cons c 'green)]
-      [(member c ans-list) (cons c 'yellow)]
+      [(member c ans-list)
+       (set! ans-list (remove c ans-list))
+       (cons c 'yellow)]
       [else (cons c 'gray)])))
 
 (module+ test
   (require rackunit)
 
   (check-false (solved? (answer (generate-puzzle "60/5*9") "27+9*9")))
+  (check-equal? (answer (generate-puzzle "49/7+5") "35/7+7")
+                '((#\3 . gray) (#\5 . yellow) (#\/ . green) (#\7 . green) (#\+ . green) (#\7 . gray)))
   (check-equal?
-   (answer (generate-puzzle "49/7+5") "35/7+7")
-   '((#\3 . gray) (#\5 . yellow) (#\/ . green) (#\7 . green) (#\+ . green) (#\7 . gray))))
+   (answer (generate-puzzle "86/2*3") "22*6-3")
+   '((#\2 . yellow) (#\2 . gray) (#\* . yellow) (#\6 . yellow) (#\- . gray) (#\3 . green))))
