@@ -1,6 +1,7 @@
 #lang info
 (define collection "mathler")
-(define deps '("base"
+(define deps '("functional-lib"
+               "base"
                ; lang extension
                "curly-fn-lib"
                "try-catch-finally-lib"
